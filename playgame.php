@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="./assets/css/index.css">
-    <title>Home Page</title>
+    <title>Play Game</title>
     
 <?php
 session_start();
@@ -111,11 +111,11 @@ if (isset($_POST['answer'])) {
     
             if ($response[0] == "12" ) {
             $_SESSION["question_id"] = $response[1];
-            $question = $response[2];
-            $answerA = $response[3];
-            $answerB = $response[4];
-            $answerC = $response[5];
-            $answerD = $response[6];
+            $_SESSION["question"] = $response[2];
+            $_SESSION["answerA"] = $response[3];
+            $_SESSION["answerB"] = $response[4];
+            $_SESSION["answerC"] = $response[5];
+            $_SESSION["answerD"] = $response[6];
                 //echo "<script>alert('$question_id');</script>";
                 // echo "<script>alert('$_SESSION["questionList"]');</script>";
                 //echo "<script>window.location.href = 'playgame.php';</script>";
@@ -148,15 +148,15 @@ if (isset($_POST['answer'])) {
     <img src="./prjltm.jpg" class="rounded mx-auto d-block " alt="index.php" >
 </div>
     <div class = "question_form d-flex justify-content-center">
-        <?php echo $question;?>
+        <?php echo $_SESSION["question"];?>
     </div>
     <div class="index_button_group d-flex justify-content-center"> 
     <div class="btn-group-vertical ">
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-        <input type="submit" class="btn  btn-lg btn-outline-primary mt-4 " name ="answer" value="<?php echo $answerA; ?>" >
-        <input type="submit" class="btn  btn-lg btn-outline-primary mt-4 " name ="answer" value="<?php echo $answerB; ?>" >
-        <input type="submit" class="btn  btn-lg btn-outline-primary mt-4 " name ="answer" value="<?php echo $answerC; ?>" >
-        <input type="submit" class="btn  btn-lg btn-outline-primary mt-4 " name ="answer" value="<?php echo $answerD; ?>" >
+        <input type="submit" class="btn  btn-lg btn-outline-primary mt-4 " name ="answer" value="<?php echo $_SESSION["answerA"]; ?>" >
+        <input type="submit" class="btn  btn-lg btn-outline-primary mt-4 " name ="answer" value="<?php echo $_SESSION["answerB"]; ?>" >
+        <input type="submit" class="btn  btn-lg btn-outline-primary mt-4 " name ="answer" value="<?php echo $_SESSION["answerC"]; ?>" >
+        <input type="submit" class="btn  btn-lg btn-outline-primary mt-4 " name ="answer" value="<?php echo $_SESSION["answerD"]; ?>" >
         <input type="hidden"name ="questionid" value="<?php echo $question_id; ?>" >
         
     </form>
@@ -174,4 +174,3 @@ if (isset($_POST['answer'])) {
 </body>
 
 </html>
-
