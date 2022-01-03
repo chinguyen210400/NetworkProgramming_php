@@ -1,5 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+    .question_form {
+        background-color: white;
+        height: 80px;
+        font-size:30px;
+        border: 4px solid #0c335a;
+        margin-left:100px;
+        margin-right:100px;
+        margin-top:50px;
+        padding: 8px 20px;
+        border-radius: 10px;
+    }
+    .answer_right{
+        float: right;
+    }
+
+    .answer_left {
+        float: left;
+    }
+    
+    .button_answer {
+        background-color: #ffffff;
+        color:black;
+        padding: 8px 20px;
+        border: 1px solid #0c335a;
+        transition: all 0.3s ease-out;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        padding: 8px 10px;
+        font-size: 20px;
+        font-family: Arial, sans-serif;
+        width: 400px;
+        height: 60px;
+        margin: 20px;
+
+    }
+
+    .button_answer:hover {
+        background-color: #0c335a;
+        color:white;
+    }
+
+    .button_answer:active {
+        background-color: #0c335a;
+        box-shadow: 0 5px #666;
+         transform: translateY(4px);
+    }
+
+    .home_help {
+        float: right;
+        margin-right:200px;
+    }
+    
+    .button_help {
+        background-color: green;
+        color:white;
+        padding: 8px 20px;
+        border: 1px solid green;
+        transition: all 0.3s ease-out;
+        border-radius: 5px;
+        padding: 8px 10px;
+        font-size: 20px;
+        font-family: Arial, sans-serif;
+        width: 100px;
+        height: 60px;
+        margin-left: 20px;
+
+    }
+
+    .button_help:hover {
+        background-color: white;
+        color:green;
+        border: 1px solid green;
+    }
+
+    .index_image {
+        margin-left:350px;
+    }
+
+    .button_stop {
+        background-color: red;
+        color:white;
+        padding: 8px 20px;
+        border: 1px solid red;
+        transition: all 0.3s ease-out;
+        border-radius: 5px;
+        padding: 8px 10px;
+        font-size: 20px;
+        font-family: Arial, sans-serif;
+        width: 100px;
+        height: 60px;
+
+    }
+
+    .button_stop:hover {
+        background-color: white;
+        color:red;
+        border: 1px solid red;
+    }
+
+</style>
 
 <head>
     <meta charset="UTF-8">
@@ -51,29 +153,40 @@ socket_close($socket);
 <body>
     <?php include('home_navbar.php'); ?>
     <div class="home_container">
+        <div class="home_header">
+            <div class="home_help btn-group">
+            <form action = "score.php" method = "post">
+                <input type="submit" class="button_stop" name ="stop" value="STOP" >
+            </form>
+
+            <form action = "help.php" method = "post">
+                <input type="submit" class="button_help" name ="help" value="HELP <?php echo $_SESSION["help"]; ?>" >
+            </form>
+    </div>
         <div class="index_image">
-    <img src="./prjltm.jpg" class="rounded mx-auto d-block " alt="index.php" >
-</div>
-    <div class = "question_form d-flex justify-content-center">
+            <img src="./prjltm.jpg" class="rounded mx-auto d-block " alt="index.php" >
+        </div>
+    </div>
+<div class="question_form">
+    <div class = " d-flex justify-content-center">
         <?php echo $_SESSION["question"];?>
+    </div>
     </div>
     <div class="index_button_group d-flex justify-content-center"> 
     <div class="btn-group-vertical ">
     <form action="playgame.php" method="post">
-        <input type="submit" class="btn  btn-lg btn-outline-primary mt-4 " name ="answer" value="<?php echo $_SESSION["answerA"]; ?>" >
-        <input type="submit" class="btn  btn-lg btn-outline-primary mt-4 " name ="answer" value="<?php echo $_SESSION["answerB"]; ?>" >
-        <input type="submit" class="btn  btn-lg btn-outline-primary mt-4 " name ="answer" value="<?php echo $_SESSION["answerC"]; ?>" >
-        <input type="submit" class="btn  btn-lg btn-outline-primary mt-4 " name ="answer" value="<?php echo $_SESSION["answerD"]; ?>" >
-        <input type="hidden"name ="questionid" value="<?php echo $question_id; ?>" >
+    <div class="answer_right btn-group-vertical ">
+        <input type="submit" class="button_answer" name ="answer" value="<?php echo $_SESSION["answerC"]; ?>" >
+        <input type="submit" class="button_answer" name ="answer" value="<?php echo $_SESSION["answerD"]; ?>" >
+    </div>
+    <div class="answer_left btn-group-vertical ">
+        <input type="submit" class="button_answer " name ="answer" value="<?php echo $_SESSION["answerA"]; ?>" >
+        <input type="submit" class="button_answer " name ="answer" value="<?php echo $_SESSION["answerB"]; ?>" >
+    </div>
+        <input type="hidden" name ="questionid" value="<?php echo $question_id; ?>" >
         
     </form>
-    <form action = "score.php" method = "post">
-          <input type="submit" class="btn  btn-lg btn-outline-primary mt-4 " name ="stop" value="STOP" >
-    </form>
-
-    <form action = "help.php" method = "post">
-          <input type="submit" class="btn  btn-lg btn-outline-primary mt-4 " name ="help" value="HELP <?php echo $_SESSION["help"]; ?>" >
-    </form>
+    
     </div>
     </div>
 

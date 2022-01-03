@@ -1,6 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+    
+    .button_index{
+        background-color: #0c335a;
+        color:rgb(255, 255, 255);
+        padding: 8px 20px;
+        border: 1px solid #ffffff;
+        transition: all 0.3s ease-out;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        padding: 8px 10px;
+        font-size: 20px;
+        font-family: Arial, sans-serif;
+        width: 400px;
+        height: 60px;
+        margin: 20px;
+        
+    }
+
+    .button_index:hover {
+        background-color:#1961aa;
+    }
+
+</style>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,13 +53,13 @@
     <div class="index_button_group d-flex justify-content-center"> 
     <div class="btn-group-vertical ">
     <form action="playgame.php" method="post">
-        <input type="submit" class="btn  btn-lg btn-outline-primary mt-4 " name ="playgame" value="PLAY GAME" >
+        <input type="submit" class="button_index" name ="playgame" value="PLAY GAME" >
     </form>
     <form action="dashboard.php" method="post">
-        <input type="submit" class="btn  btn-lg btn-outline-primary mt-4 " name ="dashboard" value="HIGH SCORE" >
+        <input type="submit" class="button_index" name ="dashboard" value="HIGH SCORE" >
     </form>
     <form action="logout.php" method="post">
-        <input type="submit" class="btn  btn-lg btn-outline-primary mt-4 " name ="logout" value="LOG OUT" >
+        <input type="submit" class="button_index" name ="logout" value="LOG OUT" >
     </form>
     </div>
     </div>
