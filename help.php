@@ -101,6 +101,10 @@
         border: 1px solid red;
     }
 
+    .home_header {
+        margin-top: 20px;
+    }
+
 </style>
 
 <head>

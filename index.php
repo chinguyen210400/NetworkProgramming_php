@@ -33,6 +33,10 @@
     .button_index:hover {
         background-color:#0c335a;
     }
+
+    .index_image {
+        margin-top: 20px;
+    }
     
 
 </style>

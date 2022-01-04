@@ -25,6 +25,10 @@
         background-color:#1961aa;
     }
 
+    .index_image {
+        margin-top: 20px;
+    }
+
 </style>
 
 <head>

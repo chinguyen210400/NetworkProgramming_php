@@ -1,6 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<style>
+table, td, th {
+  border: 1px solid black;
+  text-align: center;
+}
+
+th {
+  font-size: 30px;
+}
+
+
+td {
+  font-size: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 50px;
+  margin-left:300px;
+  margin-right:300px;
+  margin-bottom: 100px;
+}
+
+.index_image {
+  margin-top: 20px;
+}
+</style>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,7 +38,12 @@
     <link rel="stylesheet" href="./assets/css/index.css">
     <title>High Score</title>
     <?php
-    
+    $user_number = 0;
+    $userList = array();
+    $scoreList = array();
+    $x=0;
+    $y=1;
+    $z=2;
     if (isset($_POST['dashboard'])) {
 
             // create socket
@@ -37,18 +71,22 @@
             // split response from server
             $response = explode("|", $response);
             if ($response[0] == "16") {
-                echo "<script>alert('show dashboard success!');</script>";
-                
+                while ($response[$x] == "16"){
+                  $x=$x+3;
+                  $user_number=$user_number+1;
+                }
+                for ($i=0;$i<$user_number;$i++) {
+                  $userList[]=$response[$y];
+                  $scoreList[]=$response[$z];
+                  $y=$y+3;
+                  $z=$z+3;
+                }
             } else {
                 echo "<script>alert('show dashboard fail!');</script>";
                 echo "<script>window.location.href = 'home.php';</script>";
-
-            $username_info=$response[1];
-            $highscore = $response[2];
-
+            }
             // close socket
             socket_close($socket);
-        }
     }
 
     ?>
@@ -62,21 +100,31 @@
         </div>
     <div class = "table_score">
     <div class = "d-flex justify-content-center" >
-    <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Username</th>
-      <th scope="col">Highscore</th>
-    </tr>
-  </thead>
-  <div class="row align-items-start">
-    <div class="col">
-      <?php echo $username_info; ?>
-    </div>
-    <div class="col">
-      <?php echo $highscore; ?>
-    </div>
-  </div>
+    <table>
+  <tr>
+    <th>Username</th>
+    <th>High Score</th>
+  </tr>
+
+  <tr>
+    <td>
+    <?php foreach($userList as $username)
+      {
+        echo $username;
+        echo "<br />";
+      }
+    ?>
+    </td>
+    <td>
+    <?php foreach($scoreList as $score)
+      {
+        echo $score;
+        echo "<br />";
+      }
+    ?>
+    </td>
+  </tr>
+
 </table>
 </div>
 </div>
