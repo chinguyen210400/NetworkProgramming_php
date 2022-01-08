@@ -14,7 +14,7 @@
             }
 
             // 
-            $msg = "2";
+            $msg = "2|" . $_SESSION["username"] . "|";
 
             $ret = socket_write($socket, $msg, strlen($msg));
             if (!$ret) die("client write fail:" . socket_strerror(socket_last_error()) . "\n");
@@ -25,7 +25,7 @@
             echo $response;
 
             // split response from server
-            //$response = explode("|", $response);
+            $response = explode("|", $response);
             if ($response[0] == "8") {
                 session_destroy();
                 echo "<script>alert('Are you sure logout ?');</script>";

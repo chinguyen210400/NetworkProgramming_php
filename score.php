@@ -65,16 +65,27 @@
     }
     if (isset($_POST['stop'])){
          $msg = "8|".$_SESSION["username"]."|".$_SESSION["position"]."|";
-
-        $ret = socket_write($socket, $msg, strlen($msg));
-        if (!$ret) die("client write fail:" . socket_strerror(socket_last_error()) . "\n");
-
-        // receive response from server
-        $response = socket_read($socket, 1024);
-        if (!$response) die("client read fail:" . socket_strerror(socket_last_error()) . "\n");
-
         //echo $response;
   
+    }else {
+
+    $msg = "9|".$_SESSION["username"]."|".$_SESSION["position"]."|";
+    }
+
+    $ret = socket_write($socket, $msg, strlen($msg));
+    if (!$ret) die("client write fail:" . socket_strerror(socket_last_error()) . "\n");
+
+        // receive response from server
+    $response = socket_read($socket, 1024);
+    if (!$response) die("client read fail:" . socket_strerror(socket_last_error()) . "\n");
+
+    $response = explode("|", $response);
+
+    if ($response[0] == "15" ) {
+    	$_SESSION["score"] = $response[1];
+        
+    }else {
+        echo "<script>alert('Fail!');</script>"; 
     }
     socket_close($socket);
 ?>
@@ -85,7 +96,7 @@
 <div class=" d-flex justify-content-center"> 
     <div class="score_contain  list-group">
 <div class="score_display">
-        <h5>YOUR SCORE: <?php echo $_SESSION["position"];?> </h5>
+        <h5>YOUR SCORE: <?php echo $_SESSION["score"];?> </h5>
 </div>
  <div class="score_button">
 <form action="home.php" method="post">

@@ -13,6 +13,7 @@
         margin-top:50px;
         padding: 8px 20px;
         border-radius: 10px;
+        margin-bottom:30px;
     }
     .answer_right{
         float: right;
@@ -36,6 +37,7 @@
         width: 400px;
         height: 60px;
         margin: 20px;
+        margin-bottom:30px;
 
     }
 
@@ -51,8 +53,15 @@
     }
 
     .home_help {
-        float: right;
-        margin-right:200px;
+        margin-left: 1500px;
+        margin-top: 100px;
+    }
+
+    .index_image {
+       margin-right:350px;
+        margin-left:350px;
+        margin-top:50px;
+        margin-bottom: 100px;
     }
     
     .button_help {
@@ -75,10 +84,6 @@
         background-color: white;
         color:green;
         border: 1px solid green;
-    }
-
-    .index_image {
-        margin-left:350px;
     }
 
     .button_stop {
@@ -105,6 +110,13 @@
     .home_header {
         margin-top: 20px;
     }
+    .home_progress {
+        margin-top: 100px;
+    }
+
+    .home_help {
+        margin-bottom: 100px;
+    }
 
 </style>
 
@@ -114,11 +126,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./assets/css/index.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
     <title>Play Game</title>
     
 <?php
 session_start();
+if ((time() - $_SESSION['in_game_timestamp']) > 180)
+   {
+        echo "<script>alert('Time out');</script>";
+        unset($_SESSION["in_game_timestamp"]);
+        header("location:home.php");
+   }else {
+         $_SESSION["in_game_timestamp"] = time();
+   }
 
 if (isset($_POST['answer'])) {
 
@@ -152,38 +175,20 @@ if (isset($_POST['answer'])) {
 
     if ($response[0] == "13" ) {
     	$_SESSION["position"] = $_SESSION["position"] + 1;
-        //echo "<script>alert('$response[1]');</script>";
-        //echo $_SESSION["position"];
-        
+        if($_SESSION["position"] == 15){
+            echo "<script>alert('You win!');</script>";
+            echo "<script>window.location.href = 'score.php';</script>";
+        }
         
     }elseif ($response[0] == "19" )  {
-        if ($_SESSION["position"]==0){
-            $_SESSION["position"]=0;
-        }
-        elseif ($_SESSION["position"] >=1 && $_SESSION["position"] < 5 )
-        {
-            $_SESSION["position"]=1;
-            
-        }elseif($_SESSION["position"]>=5 && $_SESSION["position"] <10 )
-        {
-            $_SESSION["position"]=5;
-        }elseif($_SESSION["position"]>=10 && $_SESSION["position"] <15) {
-            $_SESSION["position"] =10;
-            
-        }
-        $msg = "9|".$_SESSION["username"]."|".$_SESSION["position"]."|";
 
-        $ret = socket_write($socket, $msg, strlen($msg));
-        if (!$ret) die("client write fail:" . socket_strerror(socket_last_error()) . "\n");
-
-        // receive response from server
-        $response = socket_read($socket, 1024);
-        if (!$response) die("client read fail:" . socket_strerror(socket_last_error()) . "\n");
-
-        echo "<script>alert('Your answer is incorrect!');</script>";
+        echo "<script>alert('Your answer is incorrect!');</script>"; 
         echo "<script>window.location.href = 'score.php';</script>";
         
     }
+    $total = 15;
+    $current = $_SESSION["position"];
+    $percent = ($current/$total)*100;
 
     // close socket
     socket_close($socket);
@@ -261,13 +266,20 @@ if (isset($_POST['answer'])) {
                 <input type="submit" class="button_help" name ="help" value="HELP <?php echo $_SESSION["help"]; ?>" >
             </form>
     </div>
-        <div class="index_image">
-            <img src="./prjltm.jpg" class="rounded mx-auto d-block " alt="index.php" >
+    <div class="index_image">
+    <div class="progress" style="height: 50px;">
+        <div class="progress-bar progress-bar-striped bg-warning " style="width: <?php echo $percent; ?>%"> <h3><?php echo $_SESSION["position"] + 1; ?></h3></div>
+    </div>
         </div>
     </div>
+    
 <div class="question_form">
     <div class = " d-flex justify-content-center">
-        <?php echo $_SESSION["question"];?>
+        <?php 
+        echo $_SESSION["position"] + 1;
+        echo ".";
+        echo $_SESSION["question"];
+        ?>
     </div>
     </div>
     <div class="index_button_group d-flex justify-content-center"> 
@@ -292,3 +304,4 @@ if (isset($_POST['answer'])) {
 </body>
 
 </html>
+

@@ -12,6 +12,7 @@
         margin-top:50px;
         padding: 8px 20px;
         border-radius: 10px;
+        margin-bottom:30px;
     }
     .answer_right{
         float: right;
@@ -35,7 +36,7 @@
         width: 400px;
         height: 60px;
         margin: 20px;
-
+        margin-bottom:30px;
     }
 
     .button_answer:hover {
@@ -50,9 +51,17 @@
     }
 
     .home_help {
-        float: right;
-        margin-right:200px;
+        margin-left: 1500px;
+        margin-top: 100px;
     }
+
+    .index_image {
+       margin-right:350px;
+        margin-left:350px;
+        margin-top:50px;
+        margin-bottom: 100px;
+    }
+    
     
     .button_help {
         background-color: green;
@@ -74,10 +83,6 @@
         background-color: white;
         color:green;
         border: 1px solid green;
-    }
-
-    .index_image {
-        margin-left:350px;
     }
 
     .button_stop {
@@ -167,13 +172,19 @@ socket_close($socket);
                 <input type="submit" class="button_help" name ="help" value="HELP <?php echo $_SESSION["help"]; ?>" >
             </form>
     </div>
-        <div class="index_image">
-            <img src="./prjltm.jpg" class="rounded mx-auto d-block " alt="index.php" >
+    <div class="index_image">
+    <div class="progress" style="height: 50px;">
+        <div class="progress-bar progress-bar-striped bg-warning " style="width: <?php echo $percent; ?>%"> <h3><?php echo $_SESSION["position"] + 1; ?></h3></div>
+    </div>
         </div>
     </div>
 <div class="question_form">
     <div class = " d-flex justify-content-center">
-        <?php echo $_SESSION["question"];?>
+    <?php 
+        echo $_SESSION["position"] + 1;
+        echo ".";
+        echo $_SESSION["question"];
+        ?>
     </div>
     </div>
     <div class="index_button_group d-flex justify-content-center"> 

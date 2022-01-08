@@ -42,8 +42,10 @@
     <?php 
         session_start();
         $_SESSION["position"] = 0;
-        $_SESSION["help"] = 3;
+        $_SESSION["help"] = 15;
         $_SESSION["questionList"] = array();
+        $_SESSION["in_game_timestamp"] = time();
+        $_SESSION["score"] = 0;
 ?>
 </header>
 
