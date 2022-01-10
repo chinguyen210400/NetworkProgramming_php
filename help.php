@@ -3,7 +3,7 @@
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
     .question_form {
-        background-color: white;
+        background-color: rgba(10,71,126,255);
         height: 80px;
         font-size:30px;
         border: 4px solid #0c335a;
@@ -13,6 +13,8 @@
         padding: 8px 20px;
         border-radius: 10px;
         margin-bottom:30px;
+        color:#fff;
+
     }
     .answer_right{
         float: right;
@@ -23,10 +25,10 @@
     }
     
     .button_answer {
-        background-color: #ffffff;
-        color:black;
+        background-color: rgba(10,71,126,255);
+        color:#fff;
         padding: 8px 20px;
-        border: 1px solid #0c335a;
+        border: 5px solid #fff;
         transition: all 0.3s ease-out;
         border-radius: 10px;
         margin-bottom: 15px;
@@ -37,15 +39,16 @@
         height: 60px;
         margin: 20px;
         margin-bottom:30px;
+
     }
 
     .button_answer:hover {
-        background-color: #0c335a;
+        background-color: #ec9b4c;
         color:white;
     }
 
     .button_answer:active {
-        background-color: #0c335a;
+        background-color: #ec9b4c;
         box-shadow: 0 5px #666;
          transform: translateY(4px);
     }
@@ -58,10 +61,9 @@
     .index_image {
        margin-right:350px;
         margin-left:350px;
-        margin-top:50px;
-        margin-bottom: 100px;
+        margin-top:100px;
+        margin-bottom: 50px;
     }
-    
     
     .button_help {
         background-color: green;
@@ -69,7 +71,7 @@
         padding: 8px 20px;
         border: 1px solid green;
         transition: all 0.3s ease-out;
-        border-radius: 5px;
+        border-radius: 50%;
         padding: 8px 10px;
         font-size: 20px;
         font-family: Arial, sans-serif;
@@ -91,7 +93,7 @@
         padding: 8px 20px;
         border: 1px solid red;
         transition: all 0.3s ease-out;
-        border-radius: 5px;
+        border-radius: 50%;
         padding: 8px 10px;
         font-size: 20px;
         font-family: Arial, sans-serif;
@@ -108,6 +110,19 @@
 
     .home_header {
         margin-top: 20px;
+    }
+    .home_progress {
+        margin-top: 100px;
+    }
+
+    .home_help {
+        margin-bottom: 100px;
+    }
+    body {
+        background-image : url('playgame.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed; 
+        background-size: 100% 100%;
     }
 
 </style>
@@ -174,7 +189,7 @@ socket_close($socket);
     </div>
     <div class="index_image">
     <div class="progress" style="height: 50px;">
-        <div class="progress-bar progress-bar-striped bg-warning " style="width: <?php echo $percent; ?>%"> <h3><?php echo $_SESSION["position"] + 1; ?></h3></div>
+        <div class="progress-bar progress-bar-striped bg-info " style="width: <?php echo $percent; ?>%"> <h3><?php echo $_SESSION["position"] + 1; ?></h3></div>
     </div>
         </div>
     </div>

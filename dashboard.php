@@ -28,6 +28,7 @@ table {
 .index_image {
   margin-top: 20px;
 }
+
 </style>
 
 <head>
