@@ -189,7 +189,7 @@ socket_close($socket);
     </div>
     <div class="index_image">
     <div class="progress" style="height: 50px;">
-        <div class="progress-bar progress-bar-striped bg-info " style="width: <?php echo $percent; ?>%"> <h3><?php echo $_SESSION["position"] + 1; ?></h3></div>
+        <div class="progress-bar progress-bar-striped bg-info " style="width: <?php echo $_SESSION["percent"]; ?>%"> <h3><?php echo $_SESSION["position"] + 1; ?></h3></div>
     </div>
         </div>
     </div>
