@@ -50,19 +50,20 @@
 
             // split response from server
             $response = explode("|", $response);
+            
             if ($response[0] == "4") {
                 $_SESSION["username"] = $username;
                 echo "<script>alert('Login success!');</script>";
                 echo "<script>window.location.href = 'home.php';</script>";
             } elseif($response[0] == "1") {
-                echo "<script>alert($response[1]);</script>";
+                echo "<script>alert('" . $response[1] . "');</script>";
                 echo "<script>window.location.href = 'login.php';</script>";
             } elseif($response[0] == "3") {
-                echo "<script>alert('Your account is signing in other device!');</script>";
+                echo "<script>alert('" . $response[1] . "');</script>";
                 echo "<script>window.location.href = 'login.php';</script>";
             }
             else {
-                echo "<script>alert($response[1]);</script>";
+                echo "<script>alert('" . $response[1] . "');</script>";
                 echo "<script>window.location.href = 'login.php';</script>";
             }
 

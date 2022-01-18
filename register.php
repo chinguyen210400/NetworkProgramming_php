@@ -59,11 +59,11 @@
                 $_SESSION["username"] = $username;
             }elseif ($response[0] == "18")
             {
-                echo "<script>alert('$response[1]');</script>";
+                echo "<script>alert('" . $response[1] . "');</script>";
                 echo "<script>window.location.href = 'register.php';</script>";
             }else {
                 
-                echo "<script>alert('Register fail!');</script>";
+                echo "<script>alert('" . $response[1] . "');</script>";
                 echo "<script>window.location.href = 'register.php';</script>";
             }
 
